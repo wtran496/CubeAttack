@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -7053959346346187939}
   m_Layer: 0
   m_Name: Player Holder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 7
-  camera: {fileID: 6243601399909921009, guid: 0d372c3ffa72b504b9b40654d7eb1bcc, type: 3}
   points: 0
   playerObj: {fileID: 1708247353560385416}
   bulletSpawnPoint: {fileID: 7664909899114133483}
