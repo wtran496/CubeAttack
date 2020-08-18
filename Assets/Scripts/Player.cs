@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿            using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +12,13 @@ public class Player : MonoBehaviour
 
     //Player
     public GameObject playerObj;
-    Rigidbody rigid;
+    public Rigidbody rigid;
 
     //Bullet
     public GameObject bulletSpawnPoint;
     public float waitTime;
     public GameObject bullet;
+    public bool ableShoot = true;
 
     //Health
     public float maxHealth = 50;
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour
     public float distToGround = 0.6f;
     //Animation
     //Animator anim;
-
+                                                                                                                                                                                                                                                                                
     bool isGrounded() { return Physics.Raycast(transform.position, Vector3.down, distToGround);}
 
     private void Start()
@@ -46,10 +47,10 @@ public class Player : MonoBehaviour
         //{
         //   distToGround = hit.distance;
         //}
-        Debug.Log(isGrounded());
+        //Debug.Log(isGrounded());
         //print("dist: " + (distToGround) + " , pos.y" + transform.position.y);
         Cam();
-            Movement();
+        Movement();
         if (isGrounded())
         {
             jump();
@@ -57,11 +58,19 @@ public class Player : MonoBehaviour
         }
         Die();
     }
-
     void Shoot()
-    {      
-        if (Input.GetMouseButton(0))
+    {
+        if (Input.GetMouseButton(0) && ableShoot == true)
         {
+
+            
+            //if (plane.Raycast(ray, out distance))
+            //{
+            //    Vector3 target = ray.GetPoint(distance);
+            //    Vector3 direction = target - transform.position;
+            //    float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            //    transform.rotation = Quaternion.Euler(0, rotation, 0);
+            //}
             //anim.SetBool("attacking", true);
             //if (anim.GetBool("running") == true)
             //{
@@ -86,6 +95,7 @@ public class Player : MonoBehaviour
         {  
             Vector3 jumpVelocity = new Vector3(0f, jumpForce, 0f);
             rigid.velocity = rigid.velocity + jumpVelocity;
+            print(this.transform.position);
         }
     }
 
@@ -132,12 +142,13 @@ public class Player : MonoBehaviour
         //    if (Input.GetKey(KeyCode.S))
         //        transform.Translate(Vector3.back * movementSpeed * Time.deltaTime);
         //}
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(horizontal * movementSpeed * Time.deltaTime, 0, vertical * movementSpeed * Time.deltaTime);
-            rigid.MovePosition(transform.position + movement);
-        
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(horizontal * movementSpeed * Time.deltaTime, 0, vertical * movementSpeed * Time.deltaTime);
+        rigid.MovePosition(transform.position + movement);
+
         //if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))
         //{
         //    anim.SetBool("running", false);
