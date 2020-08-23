@@ -23,7 +23,7 @@ public class BulletPlayer : MonoBehaviour
         if (other.tag == "Enemy")
         {
             triggeringEnemy = other.gameObject;
-            triggeringEnemy.GetComponent<Enemy>().health -= damage;
+            triggeringEnemy.GetComponent<EnemyHealth>().health -= damage;
             Destroy(this.gameObject);
         }
     }

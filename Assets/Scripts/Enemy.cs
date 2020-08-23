@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float health;
-    public float pointsPlayer = 50;
     public GameObject player;
     public Transform playerTransform;
 
@@ -30,16 +28,7 @@ public class Enemy : MonoBehaviour
     }
     public void Update()
     {
-        if (health <= 0) {
-            Die();
-        }
         Shoot();
-    }
-
-    public void Die() {
-        print("Enemy " + this.gameObject.name + " has died!");
-        player.GetComponent<Player>().points += pointsPlayer;
-        Destroy(this.gameObject);
     }
     public void Shoot() {
         if (Vector3.Distance(transform.position, playerTransform.position) > stoppingDistance)
@@ -54,7 +43,7 @@ public class Enemy : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, -speed * Time.deltaTime);
         }
-        if (timeBtwShots < -0)
+        if (timeBtwShots < 2)
         {
             bulletSpawned = Instantiate(bullet.transform, bulletSpawnPoint.transform.position, Quaternion.identity);
             bulletSpawned.rotation = this.transform.rotation;
@@ -64,6 +53,6 @@ public class Enemy : MonoBehaviour
         {
             timeBtwShots -= Time.deltaTime;
         }
-        this.transform.LookAt(player.transform);
+        this.transform.LookAt(playerTransform.transform);
     }
 }

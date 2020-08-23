@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class EnemyMelee : MonoBehaviour
 {
-    public float health;
-    public float pointsPlayer = 50;
     public GameObject player;
     public Transform playerTransform;
 
@@ -31,12 +29,11 @@ public class EnemyMelee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         Fading();
 //Running();
     }
 
-    void Fading()
+    private void Fading()
     {
         if (t <= 1) {
             t += .05f;
@@ -47,7 +44,7 @@ public class EnemyMelee : MonoBehaviour
             dashNow++;
         }
         if (dashNow == 6) {
-            GetComponent<Collider>().isTrigger = true;
+            //GetComponent<Collider>().isTrigger = true;
             skillIndicator.GetComponent<Image>().enabled = false;
             dashEnabled = true;
             Dash();
@@ -70,7 +67,7 @@ public class EnemyMelee : MonoBehaviour
             dashEnabled = false;
             t = 0;
             startDistance = 0;
-            GetComponent<Collider>().isTrigger = false;
+           // GetComponent<Collider>().isTrigger = false;
         }
     }
     //part of swinging weapon 
@@ -100,7 +97,7 @@ public class EnemyMelee : MonoBehaviour
             dashEnabled = false;
             t = 0;
             startDistance = 0;
-            GetComponent<Collider>().isTrigger = false;
+           // GetComponent<Collider>().isTrigger = false;
         }
     }
 
