@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, -speed * Time.deltaTime);
         }
+
         if (timeBtwShots < 2)
         {
             bulletSpawned = Instantiate(bullet.transform, bulletSpawnPoint.transform.position, Quaternion.identity);
@@ -53,6 +54,8 @@ public class Enemy : MonoBehaviour
         {
             timeBtwShots -= Time.deltaTime;
         }
-        this.transform.LookAt(playerTransform.transform);
+
+        Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(targetPosition);
     }
 }

@@ -19,18 +19,22 @@ public class EnemyMelee : MonoBehaviour
     private float dashNow = 0;
     private bool dashEnabled = false;
     public Image skillIndicator;
+
+    private Transform weapon;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+        weapon = this.transform.GetChild(0);
         skillIndicator.GetComponent<Image>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Swing();
         Fading();
-//Running();
+        //Running();
     }
 
     private void Fading()
@@ -52,7 +56,8 @@ public class EnemyMelee : MonoBehaviour
         if (!dashEnabled)
         {           
             skillIndicator.GetComponent<Image>().enabled = true;
-            this.transform.LookAt(player.transform);
+            Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            transform.LookAt(targetPosition);
         }
         GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
     }
@@ -83,7 +88,7 @@ public class EnemyMelee : MonoBehaviour
 
     }
     void Swing() {
-        //swinging weapon
+        weapon.Rotate(0, 196, 0);
     }
 
     public void OnTriggerEnter(Collider other)

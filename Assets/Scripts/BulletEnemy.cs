@@ -19,14 +19,20 @@ public class BulletEnemy : MonoBehaviour
     {
         transform.Translate(Vector3.forward * Time.deltaTime * 7f * speed);
         startDistance += 1 * Time.deltaTime;
-        if (startDistance >= maxDistance)
+        if (startDistance >= maxDistance) {
             Destroy(this.gameObject);
+        }
+            
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             player.GetComponent<Player>().health -= 10;
+            Destroy(this.gameObject);
+        }
+        if (other.tag == "Wall")
+        {
             Destroy(this.gameObject);
         }
     }

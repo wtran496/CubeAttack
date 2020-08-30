@@ -26,5 +26,9 @@ public class BulletPlayer : MonoBehaviour
             triggeringEnemy.GetComponent<EnemyHealth>().health -= damage;
             Destroy(this.gameObject);
         }
+        if (other.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
