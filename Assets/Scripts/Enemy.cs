@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject player;
-    public Transform playerTransform;
+    private GameObject player;
+    private Transform playerTransform;
 
     public GameObject bullet;
     public Transform bulletSpawnPoint;
@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
         timeBtwShots = startTimeBtwShots;
         pistolHolder = this.transform.GetChild(0);
         bulletSpawnPoint = pistolHolder.GetChild(2);
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = GameObject.FindWithTag("Player").transform;
 
     }
     public void Update()

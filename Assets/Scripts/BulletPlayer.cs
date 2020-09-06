@@ -20,7 +20,7 @@ public class BulletPlayer : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" || other.tag == "Boss")
         {
             triggeringEnemy = other.gameObject;
             triggeringEnemy.GetComponent<EnemyHealth>().health -= damage;

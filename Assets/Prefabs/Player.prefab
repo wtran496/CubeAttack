@@ -288,10 +288,10 @@ MonoBehaviour:
   movementSpeed: 7
   points: 0
   playerObj: {fileID: 3658922353710634419}
-  rigid: {fileID: 0}
+  rigid: {fileID: 7011061182754136195}
   bulletSpawnPoint: {fileID: 5705156264486364624}
   waitTime: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1067144514013756334, guid: b70ddf4f611fa1c4299a94fbd061b6e8, type: 3}
   ableShoot: 1
   maxHealth: 50
   health: 0

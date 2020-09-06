@@ -6,7 +6,12 @@ public class EnemyHealth : MonoBehaviour
 {
     public float health;
     public float pointsPlayer = 50;
-    public GameObject player;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
 
     // Update is called once per frame
     void Update()

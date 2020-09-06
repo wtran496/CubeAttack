@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Boss1 : MonoBehaviour
 {
-    public GameObject player;
-    public Transform playerTransform;
+    private GameObject player;
+    private Transform playerTransform;
 
     public float stoppingDistance;
     public float speed;
@@ -27,6 +27,8 @@ public class Boss1 : MonoBehaviour
     public GameObject bullet;
     public GameObject bulletBoss;
     private GameObject placeBullet;
+    public Transform bossSpawn;
+    public GameObject[] bossMinions;
 
     private float timeBtwShots;
     public float startTimeBtwShots;
@@ -35,13 +37,15 @@ public class Boss1 : MonoBehaviour
     void Start()
     {
         skillIndicator.GetComponent<Image>().enabled = false;
+        player = GameObject.FindWithTag("Player");
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Running();
-        //Fading();
+       // Spinning();
+        Fading();
     }
     private void Fading()
     {
@@ -92,6 +96,7 @@ public class Boss1 : MonoBehaviour
             dashEnabled = false;
             t = 0;
             startDistance = 0;
+            Instantiate(bossMinions[Random.Range(0,2)].transform, bossSpawn.transform.position, bossSpawn.transform.rotation);
         }
     }
 
@@ -104,7 +109,7 @@ public class Boss1 : MonoBehaviour
             placeBullet = bullet;
     }
 
-    void Running()
+    void Spinning()
     {
         transform.Rotate(0, 10 * Time.deltaTime * speed, 0);
         //if (Vector3.Distance(transform.position, playerTransform.position) > stoppingDistance)

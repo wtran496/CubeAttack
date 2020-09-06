@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class EnemyMelee : MonoBehaviour
 {
-    public GameObject player;
-    public Transform playerTransform;
+    private GameObject player;
+    private Transform playerTransform;
 
     public float stoppingDistance;
     public float speed;
@@ -21,12 +21,14 @@ public class EnemyMelee : MonoBehaviour
     public Image skillIndicator;
 
     private Transform weapon;
-
+    private int rand = 6;
     // Start is called before the first frame update
     void Start()
     {
         weapon = this.transform.GetChild(0);
         skillIndicator.GetComponent<Image>().enabled = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -47,11 +49,12 @@ public class EnemyMelee : MonoBehaviour
             t = 0;
             dashNow++;
         }
-        if (dashNow == 6) {
+        if (dashNow == rand) {
             //GetComponent<Collider>().isTrigger = true;
             skillIndicator.GetComponent<Image>().enabled = false;
             dashEnabled = true;
             Dash();
+            
         }
         if (!dashEnabled)
         {           
@@ -72,7 +75,8 @@ public class EnemyMelee : MonoBehaviour
             dashEnabled = false;
             t = 0;
             startDistance = 0;
-           // GetComponent<Collider>().isTrigger = false;
+            rand = Random.Range(0, 10);
+            // GetComponent<Collider>().isTrigger = false;
         }
     }
     //part of swinging weapon 

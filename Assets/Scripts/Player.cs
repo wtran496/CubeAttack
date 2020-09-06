@@ -26,11 +26,11 @@ public class Player : MonoBehaviour
 
     private float jumpForce = 5.0f;
     //test
-    public float distToGround = 0.6f;
+    public float distToGround = 0.5f;
     //Animation
     //Animator anim;
                                                                                                                                                                                                                                                                                 
-    bool isGrounded() { return Physics.Raycast(transform.position, Vector3.down, distToGround);}
+    bool isGrounded() {  return Physics.Raycast(transform.position, Vector3.down, distToGround);}
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         Cam();
         Movement();
         if (isGrounded())
-        {
+        {          
             jump();
             Shoot();
         }
@@ -62,8 +62,14 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && ableShoot == true)
         {
+            Vector3 clickPosition = -Vector3.one;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            
+            if (Physics.Raycast(ray, out hit)) {
+                clickPosition = hit.point;
+            }
+            Debug.Log(clickPosition);
             //if (plane.Raycast(ray, out distance))
             //{
             //    Vector3 target = ray.GetPoint(distance);
