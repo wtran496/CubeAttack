@@ -42,15 +42,16 @@ public class Abilities : MonoBehaviour
     private IEnumerator speedCoroutine;
     private IEnumerator SpeedUp(float waitTime)
     {
-        body.movementSpeed = 20f;
+        dash.Play();
+        body.movementSpeed = 30f;
         yield return new WaitForSeconds(waitTime);
-        body.movementSpeed = 7f;
+        body.movementSpeed = 20f;
         isCooldown2 = true;
         abilityImage2.fillAmount = 1;
         isDash = false;
+        dash.Stop();
     }
     
-
     [Header("Ability 3")]
     public Image abilityImage3;
     public float cooldown3 = 5;
@@ -59,13 +60,19 @@ public class Abilities : MonoBehaviour
 
     //Ability 3 Input Variables
     public Image targetCircle;
-    public Image indicatorRangeCircle;
+    //public Image indicatorRangeCircle;
     public Canvas ability3Canvas;
-    private Vector3 posUp;
     public float maxAbility2Distance;
+    public Vector3 newHitPos;
 
     //Ability 3 variables
     public GameObject bomb;
+
+    [Header("Audio")]
+    public AudioSource QThrow;
+    public AudioSource RThrow;
+    public AudioSource dash;
+    public AudioSource explosion;
 
     private void Start()
     {
@@ -75,7 +82,7 @@ public class Abilities : MonoBehaviour
 
         skillshot.GetComponent<Image>().enabled = false;
         targetCircle.GetComponent<Image>().enabled = false;
-        indicatorRangeCircle.GetComponent<Image>().enabled = false;
+        //indicatorRangeCircle.GetComponent<Image>().enabled = false;
     }
     // Update is called once per frame
     void Update()
@@ -87,16 +94,9 @@ public class Abilities : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //Ability 1 & 2 Inputs
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-        }
-
         //Ability 3 Inputs
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            posUp = new Vector3(hit.point.x, 10f, hit.point.z);
             position = hit.point;
         }
         
@@ -107,11 +107,11 @@ public class Abilities : MonoBehaviour
         ability1Canvas.transform.rotation = Quaternion.Lerp(transRot, ability1Canvas.transform.rotation, 0f);
 
         //Ability 3 Canvas Inputs
-        var hitPosDir = (hit.point - transform.position).normalized;
-        float distance = Vector3.Distance(hit.point, transform.position);
-        distance = Mathf.Min(distance, maxAbility2Distance);
-        var newHitPos = transform.position + hitPosDir * distance;
-        ability3Canvas.transform.position = (newHitPos);
+        //var hitPosDir = (hit.point - transform.position).normalized;
+        //float distance = Vector3.Distance(hit.point, transform.position);
+        //distance = Mathf.Min(distance, maxAbility2Distance);
+        //newHitPos = transform.position + hitPosDir * distance;
+        ability3Canvas.transform.position = position;
     }
 
     void Ability1()
@@ -122,7 +122,7 @@ public class Abilities : MonoBehaviour
             body.ableShoot = false;
 
             //Disable other UI
-            indicatorRangeCircle.GetComponent<Image>().enabled = false;
+          //  indicatorRangeCircle.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
         }
 
@@ -151,6 +151,7 @@ public class Abilities : MonoBehaviour
 
     void Blast() {
         //WORK ON POSITION
+        QThrow.Play();
         Instantiate(rocket.transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
         // how much the character should be knocked back
         //body.rigid.AddForce(5000, 0);
@@ -167,7 +168,7 @@ public class Abilities : MonoBehaviour
             Dash();
             //Disable other UI
             skillshot.GetComponent<Image>().enabled = false;
-            indicatorRangeCircle.GetComponent<Image>().enabled = false;
+           // indicatorRangeCircle.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
         }
 
@@ -190,7 +191,7 @@ public class Abilities : MonoBehaviour
     {
         if (Input.GetKey(ability3) && isCooldown3 == false)
         {
-            indicatorRangeCircle.GetComponent<Image>().enabled = true;
+           // indicatorRangeCircle.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
            
             //Disable Skillshot UI
@@ -209,7 +210,7 @@ public class Abilities : MonoBehaviour
         {
             abilityImage3.fillAmount -= 1 / cooldown3 * Time.deltaTime;
 
-            indicatorRangeCircle.GetComponent<Image>().enabled = false;
+           // indicatorRangeCircle.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
 
             if (abilityImage3.fillAmount <= 0)
@@ -221,6 +222,8 @@ public class Abilities : MonoBehaviour
     }
 
     void Explosion() {
+        RThrow.Play();
         Instantiate(bomb.transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+        explosion.Play();
     }
 }

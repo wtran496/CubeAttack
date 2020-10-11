@@ -9,7 +9,6 @@ public class Rocket : MonoBehaviour
     public float maxDistance = 5;
     private GameObject triggeringEnemy;
     public float damage;
-
     // Update is called once per frame
     void Update()
     {
@@ -20,10 +19,14 @@ public class Rocket : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" || other.tag == "Boss" || other.tag == "Boss Minion")
         {
             triggeringEnemy = other.gameObject;
             triggeringEnemy.GetComponent<EnemyHealth>().health -= damage;
+            Destroy(this.gameObject);
+        }
+        if (other.tag == "Wall")
+        {
             Destroy(this.gameObject);
         }
     }

@@ -28,8 +28,9 @@ public class BulletEnemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("TEST");
             player.GetComponent<Player>().health -= 10;
-            Destroy(this.gameObject);
+            Destroy(this.gameObject);     
         }
         if (other.tag == "Wall")
         {

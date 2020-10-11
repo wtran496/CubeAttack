@@ -9,7 +9,6 @@ public class BulletPlayer : MonoBehaviour
     public float maxDistance = 5;
     private GameObject triggeringEnemy;
     public float damage;
-
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +19,7 @@ public class BulletPlayer : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy" || other.tag == "Boss")
+        if (other.tag == "Enemy" || other.tag == "Boss" || other.tag == "Boss Minion")
         {
             triggeringEnemy = other.gameObject;
             triggeringEnemy.GetComponent<EnemyHealth>().health -= damage;
