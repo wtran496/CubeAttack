@@ -39,7 +39,7 @@ public class BulletBoss : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            player.GetComponent<Player>().health -= damage;
+            player.GetComponent<PlayerHealth>().health -= damage;
             Destroy(this.gameObject);
         }
         if (other.tag == "Wall") {

@@ -10,6 +10,9 @@ TagManager:
   - Boss
   - Boss Minion
   - Timer
+  - Ability 1 Image
+  - Ability 2 Image
+  - Ability 3 Image
   layers:
   - Default
   - TransparentFX

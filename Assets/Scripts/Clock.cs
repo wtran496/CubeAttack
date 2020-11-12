@@ -15,7 +15,6 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("WORK2");
         if (time.GetComponent<Timer>().t % 60 < 10)
             thisText.text = "Timer: " + time.GetComponent<Timer>().minutes + ":0" + time.GetComponent<Timer>().seconds;
         else

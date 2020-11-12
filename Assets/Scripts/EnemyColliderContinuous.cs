@@ -14,7 +14,7 @@ public class EnemyColliderContinuous : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            player.GetComponent<Player>().health -= damage;
+            player.GetComponent<PlayerHealth>().health -= damage;
         }
     }
 }

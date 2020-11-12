@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class EnemyCollider : MonoBehaviour
+using Photon.Pun;
+public class EnemyCollider : MonoBehaviourPunCallbacks
 {
     private GameObject player;
     public int damage = 10;
@@ -14,7 +14,7 @@ public class EnemyCollider : MonoBehaviour
     {      
         if (col.gameObject.tag == "Player")
         {
-            player.GetComponent<Player>().health -= damage;
+            player.GetComponent<PlayerHealth>().health -= damage;
         }
     }
 }
