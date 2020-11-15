@@ -9,8 +9,6 @@ public class PhotonPlayer : MonoBehaviour
 {
     private PhotonView PV;
     public PlayerController myAvatar;
-    public Health thisSlider;
-    public PlayerHealth thisHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -20,18 +18,9 @@ public class PhotonPlayer : MonoBehaviour
         if (PV.IsMine) {
             GameObject avatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), GameSetup.GS.spawnPoints[spawnPicker].position,GameSetup.GS.spawnPoints[spawnPicker].rotation, 0);
             myAvatar = avatar.GetComponent<PlayerController>();
-            thisSlider = avatar.GetComponent<Health>();
-            thisHealth = avatar.GetComponent<PlayerHealth>();
             //Camera
             myAvatar.mCameraSetup(GameSetup.GS.myCamera);
             GameSetup.GS.myCamera.GetComponent<mCamera>().thisPlayer = myAvatar.cameraTarget;
-            //Health Slider
-            myAvatar.mHealthSliderSetup(GameSetup.GS.mySlider);
-            GameSetup.GS.mySlider.GetComponent<Health>().playerSlider2D = myAvatar.sliderTarget;
-            GameSetup.GS.mySlider.GetComponent<Health>().playerSlider3D = myAvatar.sliderTarget;
-            //Health
-            GameSetup.GS.mySlider.GetComponent<Health>().playerSlider2D.maxValue = thisHealth.health;
-            GameSetup.GS.mySlider.GetComponent<Health>().playerSlider3D.maxValue = thisHealth.health;
         }
     }
 

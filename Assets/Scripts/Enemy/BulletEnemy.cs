@@ -10,11 +10,6 @@ public class BulletEnemy : MonoBehaviour
     public float damage;
     private GameObject player;
 
-    private void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * 7f * speed);
@@ -28,7 +23,8 @@ public class BulletEnemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            player.GetComponent<PlayerHealth>().health -= 10;
+            //player = GameObject.FindWithTag("Player");
+            other.GetComponent<PlayerHealth>().health -= 10;
             Destroy(this.gameObject);     
         }
         if (other.tag == "Wall")

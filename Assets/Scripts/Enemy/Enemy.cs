@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private GameObject player;
-    private Transform playerTransform;
 
     public GameObject bullet;
     public Transform bulletSpawnPoint;
@@ -29,9 +28,7 @@ public class Enemy : MonoBehaviour
         pistolHolder = this.transform.GetChild(0);
         bulletSpawnPoint = pistolHolder.GetChild(2);
         player = GameObject.FindGameObjectWithTag("Player");
-        playerTransform = GameObject.FindWithTag("Player").transform;
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
-
+        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
     }
     public void Update()
     {

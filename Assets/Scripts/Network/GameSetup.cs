@@ -8,7 +8,6 @@ public class GameSetup : MonoBehaviour
     public Transform[] spawnPoints;
 
     public Camera myCamera;
-    public Slider mySlider;
 
     private void Awake()
     {
