@@ -32,6 +32,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
+        //Setting singleton
         if (PhotonRoom.room == null)
         {
             PhotonRoom.room = this;
@@ -101,11 +102,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("A new player has joiend the room");
         photonPlayers = PhotonNetwork.PlayerList;
         playersInRoom++;
-        if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers) {
-            readyToStart = true;
-            if (!PhotonNetwork.IsMasterClient)
-                return;
-            PhotonNetwork.CurrentRoom.IsOpen = false;
+        if (MultiplayerSettings.multiplayerSettings.delayStart) {
+            Debug.Log("Displays players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if (playersInRoom > 1)
+                readyToCount = true;
+            if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers) {
+                readyToStart = true;
+                if (!PhotonNetwork.IsMasterClient)
+                    return;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
         }
     }
 
@@ -172,7 +178,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     lessThanMaxPlayers -= Time.deltaTime;
                     timeToStart = lessThanMaxPlayers;
                 }
-                Debug.Log("Display time to start ot the players " + timeToStart);
+                Debug.Log("Display time to start to the players " + timeToStart);
                 if (timeToStart <= 0) {
                     StartGame();
                 }

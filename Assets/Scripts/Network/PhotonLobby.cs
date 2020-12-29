@@ -26,7 +26,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         Debug.Log("Player has connected to the Photon master server");
         PhotonNetwork.AutomaticallySyncScene = true;
-        battleButton.SetActive(true);
+        battleButton.SetActive(true); //Player is now connected to servers, enables battlebutton to allow joi na game.
     }
 
     public void OnBattleButtonClicked()

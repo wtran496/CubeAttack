@@ -6,8 +6,12 @@ using System;
 using Photon.Pun;
 public class Abilities : MonoBehaviourPunCallbacks
 {
+    //Photon View
+    PhotonView PV;
+
     [Header("Ability 1")]
-    private Image abilityImage1;
+    [SerializeField]
+    private Image abilityImage1 = null;
     public float cooldown1 = 5;
     bool isCooldown = false;
     public KeyCode ability1;
@@ -33,7 +37,8 @@ public class Abilities : MonoBehaviourPunCallbacks
     public Transform player;
 
     [Header("Ability 2")]
-    private Image abilityImage2;
+    [SerializeField]
+    private Image abilityImage2 = null;
     public float cooldown2 = 5;
     bool isCooldown2 = false;
     public KeyCode ability2;
@@ -55,7 +60,8 @@ public class Abilities : MonoBehaviourPunCallbacks
     }
     
     [Header("Ability 3")]
-    private Image abilityImage3;
+    [SerializeField]
+    private Image abilityImage3 = null;
     public float cooldown3 = 5;
     bool isCooldown3 = false;
     public KeyCode ability3;
@@ -76,9 +82,11 @@ public class Abilities : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        abilityImage1 = GameObject.FindGameObjectWithTag("Ability 1 Image").GetComponent<Image>();
-        abilityImage2 = GameObject.FindGameObjectWithTag("Ability 2 Image").GetComponent<Image>();
-        abilityImage3 = GameObject.FindGameObjectWithTag("Ability 3 Image").GetComponent<Image>();
+        PV = this.GetComponent<PhotonView>();
+
+        //abilityImage1 = GameObject.FindGameObjectWithTag("Ability 1 Image").GetComponent<Image>();
+        //abilityImage2 = GameObject.FindGameObjectWithTag("Ability 2 Image").GetComponent<Image>();
+        //abilityImage3 = GameObject.FindGameObjectWithTag("Ability 3 Image").GetComponent<Image>();
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
         abilityImage3.fillAmount = 0;
@@ -94,6 +102,8 @@ public class Abilities : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (!PV.IsMine)
+            return;
         Ability1();
         Ability2();
         Ability3();
@@ -129,30 +139,29 @@ public class Abilities : MonoBehaviourPunCallbacks
             bullet.ableShoot = false;
 
             //Disable other UI
-          //  indicatorRangeCircle.GetComponent<Image>().enabled = false;
+            //  indicatorRangeCircle.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
         }
 
         if (skillshot.GetComponent<Image>().enabled == true && Input.GetMouseButtonDown(0))
-        {           
+        {
             isCooldown = true;
             abilityImage1.fillAmount = 1;
             Blast();
             coroutine = WaitAndPrint(0.5f);
-            StartCoroutine(coroutine);        
+            StartCoroutine(coroutine);
         }
-
         if (isCooldown)
         {
             abilityImage1.fillAmount -= 1 / cooldown1 * Time.deltaTime;
             skillshot.GetComponent<Image>().enabled = false;
 
-             if (abilityImage1.fillAmount <= 0)
+            if (abilityImage1.fillAmount <= 0)
             {
                 abilityImage1.fillAmount = 0;
                 isCooldown = false;
             }
-        }
+        }   
     }
 
     void Blast() {

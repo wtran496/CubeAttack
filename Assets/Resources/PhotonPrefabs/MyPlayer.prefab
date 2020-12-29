@@ -70,8 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAvatar: {fileID: 0}
-  thisSlider: {fileID: 0}
-  thisHealth: {fileID: 0}
 --- !u!114 &260237695235821748
 MonoBehaviour:
   m_ObjectHideFlags: 0

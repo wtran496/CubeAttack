@@ -8,7 +8,6 @@ public class Doors : MonoBehaviour
     public GameObject door2;
     public GameObject door3;
     public GameObject door4;
-
     public int doorCheck = 0;
     // Update is called once per frame
     void Update()

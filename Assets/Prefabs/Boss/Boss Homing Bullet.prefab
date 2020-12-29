@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4560311618385635721}
   - component: {fileID: 4560311618385635720}
   - component: {fileID: 4435569373344232654}
+  - component: {fileID: 1501370035640915662}
   m_Layer: 0
   m_Name: Boss Homing Bullet
   m_TagString: Bullet
@@ -57,6 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4560311618385635720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,3 +109,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d461d578e556045922eaab05311621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1501370035640915662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560311618385635723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

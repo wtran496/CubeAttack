@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
     private void Start()
     {
         maxHealth = health;
-        player = GameObject.FindWithTag("Player");
         boss = FindObjectOfType<Boss1>();
         door = FindObjectOfType<Doors>();
     }
@@ -31,7 +30,6 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
     private void Die()
     {
         door.doorCheck++;
-        player.GetComponent<PlayerController>().points += pointsPlayer;
         if (this.tag == "Boss Minion")
         {
             boss.minionLimit--;
@@ -40,6 +38,6 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
         if (this.tag == "Boss") {
             SceneManager.LoadScene("Win");
         }
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }

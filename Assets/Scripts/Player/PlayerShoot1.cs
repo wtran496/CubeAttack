@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class PlayerShoot1 : MonoBehaviourPunCallbacks
 {
+    private PhotonView PV;
+
     //Bullet
     [SerializeField]
     private GameObject bulletSpawnPoint = null;
@@ -29,11 +32,12 @@ public class PlayerShoot1 : MonoBehaviourPunCallbacks
     {
         AudioSource[] audios = GetComponents<AudioSource>();
         audioBullet = audios[0];
+        PV = this.GetComponent<PhotonView>();
     }
-    void Update()
+    void FixedUpdate()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer)
+        if (PV.IsMine && groundedPlayer)
             Shoot();
     }
     void Shoot()
@@ -58,7 +62,7 @@ public class PlayerShoot1 : MonoBehaviourPunCallbacks
                 {
                     bulletLimit++;               
                     audioBullet.Play();
-                    Instantiate(bullet.transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+                    PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Bullet"), bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation,0);
                     bulletSpacing = 0;
                 }
             }

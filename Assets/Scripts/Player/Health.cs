@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     private Slider playerSlider3D = null;
     private Slider playerSlider2D = null;
     [SerializeField]
-    private GameObject player;
+    private GameObject player = null;
 
     private void Start()
     {

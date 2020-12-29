@@ -12,18 +12,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public Camera thisCamera;
     public Transform cameraTarget;
 
-    //Health UI
-    public Slider thisSlider;
-    public Slider sliderTarget;
     //Player
     public GameObject playerObj;
+    private PhotonView PV;
 
+    private void Start()
+    {
+        PV = this.GetComponent<PhotonView>();
+    }
     void Update()
     {
-        Cam();
-    }
-    public void mHealthSliderSetup(Slider mainSlider) {
-        thisSlider = mainSlider;
+        if (PV.IsMine)
+            Cam();
     }
 
     public void mCameraSetup(Camera mainCamera) {

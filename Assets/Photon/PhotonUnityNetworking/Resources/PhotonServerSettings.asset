@@ -41,6 +41,12 @@ MonoBehaviour:
   - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - StartHealth
+  - RPC_BulletDistance
+  - RPC_Ability1Cooldown
+  - RPC_Ability1Play
+  - RPC_Ability1Press
+  - RPC_Blast
+  - BulletDistance
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

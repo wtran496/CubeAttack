@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerBomb : MonoBehaviour
+using Photon.Pun;
+public class PlayerBomb : MonoBehaviourPunCallbacks
 {
     public float damage;
     public float radius = 5f;
@@ -20,9 +20,9 @@ public class PlayerBomb : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         Explode();
     }
-    void Update()
+    void FixedUpdate()
     {
-        print(this.transform.position);
+        print("PlayerBomb: "+ this.transform.position);
         Animation += Time.deltaTime;
         Animation = Animation % 1f;
         if (ableMouse)
@@ -51,7 +51,7 @@ public class PlayerBomb : MonoBehaviour
                 rb.health -= 100;
             }
         }
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
     }
     public void OnTriggerEnter(Collider other)
     {

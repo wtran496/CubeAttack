@@ -10,30 +10,33 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField]
     private CharacterController controller = null;
     private bool groundedPlayer;
-    //public PhotonView PV;
+    private PhotonView PV;
 
     //Movement
     public float movementSpeed = 100.0f;
 
     //Jump 
-    private float jumpForce = -.3f;
+    private float jumpForce = -.6f;
     private float gravityValue = -9.81f;
+
+    private void Start()
+    {
+        PV = this.GetComponent<PhotonView>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        //if (!PV.IsMine)
-        //    return;
+        if (!PV.IsMine)
+            return;
         KeepOnGround();
         JumpAndGravity();
     }
 
     void FixedUpdate() {
-        //if (PV.IsMine)
-        //{
+        if (PV.IsMine)
            Movement();
-        //}
     }
 
     private void Movement()
