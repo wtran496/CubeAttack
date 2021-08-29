@@ -32,15 +32,16 @@ public class EnemyMelee : MonoBehaviourPunCallbacks
         skillIndicator.GetComponent<Image>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = GameObject.FindWithTag("Player").transform;
-       // Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(),true);
+     //   Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (backUp) {
-            MoveBack();
-        }
+        //if (backUp) {
+        //    Debug.Log("MOVE BACK WORKS");
+        //   // MoveBack();
+        //}
         Swing();        
         Fading();
         //Running();
@@ -51,12 +52,12 @@ public class EnemyMelee : MonoBehaviourPunCallbacks
         if (t <= 1) { //Timer
             t += .05f;
         }
-        else if (t > 1 && dashEnabled == false){ //
-            
+        else if (t > 1 && dashEnabled == false){    
             t = 0;
-            dashNow++;
+            dashNow++;      
         }
         if (dashNow == rand) {
+            gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
             backUp = false;
             skillIndicator.GetComponent<Image>().enabled = false;
             dashEnabled = true;
@@ -80,17 +81,18 @@ public class EnemyMelee : MonoBehaviourPunCallbacks
             dashEnabled = false;
             t = 0;
             startDistance = 0;
-            rand = Random.Range(0, 10);
+            rand = Random.Range(2, 10);
         }
     }
     //part of swinging weapon 
     //go toward character
-    private void Running() {
-        if (Vector3.Distance(transform.position, playerTransform.position) > stoppingDistance)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, speed * Time.fixedDeltaTime);
-        }
-    }
+    //private void Running() {
+    //    if (Vector3.Distance(transform.position, playerTransform.position) > stoppingDistance)
+    //    {
+    //        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, speed * Time.fixedDeltaTime);
+    //    }
+    //}
+
     private void Swing() {
         weapon.Rotate(0, 196, 0);
     }
@@ -100,17 +102,16 @@ public class EnemyMelee : MonoBehaviourPunCallbacks
     }
 
     void OnCollisionEnter(Collision collision)
-    {
-            if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player") {          
-            dashNow = 0;
-            dashEnabled = false;
-            t = 0;
-            startDistance = 0;
-            rand = Random.Range(1, 10);
+    {      
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player") {
+        dashNow = 0;
+        dashEnabled = false;
+        t = 0;
+        startDistance = 0;
+        rand = Random.Range(2, 10);           
             if (collision.gameObject.tag == "Player")
             {
-                player.GetComponent<PlayerHealth>().health -= 10;
-                backUp = true;
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;        
             }
         }
         

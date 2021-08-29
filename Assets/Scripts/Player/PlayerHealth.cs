@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-public class PlayerHealth : MonoBehaviourPunCallbacks
+using Photon.Realtime;
+
+public class PlayerHealth : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     //Health
     public float maxHealth = 0;
     public float health = 1000;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     {
         if (health <= 0)
         {
+         //   Destroy(PhotonRoomCustomMatch.room.gameObject);
+            if (PhotonNetwork.InRoom)
+                PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("Game Over");
         }
     }

@@ -8,7 +8,6 @@ public class BulletEnemy : MonoBehaviour
     float startDistance = 0;
     public float maxDistance = 5;
     public float damage;
-    private GameObject player;
 
     void Update()
     {
